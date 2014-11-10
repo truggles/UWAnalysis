@@ -1238,7 +1238,7 @@ std::pair<float,float> makeHistogram(TTree* tree,std::string folder,std::string 
 
 	std::pair<float,float> high;
 	std::pair<float,float> low;
-	
+
 	high = makeHistogram(t,channel_+postfix,"W_High",("("+preselection+"&&"+wSel+")*"+weight_).c_str(),1);
         std::cout<<"OS W Mt>70: "<<high.first<<std::endl;
 	low = makeHistogram(t,channel_+postfix,"W_Low",("("+preselection+"&&"+sigSel+")*"+weight_).c_str(),1);
