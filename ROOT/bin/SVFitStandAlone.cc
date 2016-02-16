@@ -224,6 +224,13 @@ void readdir(TDirectory *dir, optutl::CommandLineParser parser, char TreeToUse[]
       }
       
       printf("Found tree -> weighting\n");
+
+
+      edm::FileInPath inputFileName_visPtResolution("TauAnalysis/SVfitStandalone/data/svFitVisMassAndPtResolutionPDF.root");
+      TH1::AddDirectory(false);  
+      TFile* inputFile_visPtResolution = new TFile(inputFileName_visPtResolution.fullPath().data());  
+
+
       for(Int_t i=0;i<t->GetEntries();++i)
 	{
 	  //if(j>1)break ;
@@ -259,12 +266,7 @@ void readdir(TDirectory *dir, optutl::CommandLineParser parser, char TreeToUse[]
 	  covMET[1][1] =  covMatrix11;
 
 
-      edm::FileInPath inputFileName_visPtResolution("TauAnalysis/SVfitStandalone/data/svFitVisMassAndPtResolutionPDF.root");
-      TH1::AddDirectory(false);  
-      TFile* inputFile_visPtResolution = new TFile(inputFileName_visPtResolution.fullPath().data());  
-
-
-	  if((decayMode==0||decayMode==1||decayMode==10)&&(channel=="et"||channel=="mt")){
+	  if(channel=="et"||channel=="mt"){
 	    // define lepton four vectors
 	    std::vector<svFitStandalone::MeasuredTauLepton> measuredTauLeptons;
 	    // check if electron or muon
@@ -331,7 +333,6 @@ void readdir(TDirectory *dir, optutl::CommandLineParser parser, char TreeToUse[]
       } // eMu
 
 
-	  //else if((decayMode==0||decayMode==1||decayMode==10)&&(decayMode2==0||decayMode2==1||decayMode2==10)&&channel=="tt"){
 	  else if(channel=="tt"){
 	    // define lepton four vectors
 	    std::vector<svFitStandalone::MeasuredTauLepton> measuredTauLeptons;
@@ -396,8 +397,9 @@ void readdir(TDirectory *dir, optutl::CommandLineParser parser, char TreeToUse[]
       svFitPhi = -100;
       svFitMET = -100;
       svFitTransverseMass = -100;
-      delete inputFile_visPtResolution;
 	}
+      delete inputFile_visPtResolution;
+      dirsav->cd();
 
 	  
       t->Write("",TObject::kOverwrite);
