@@ -23,6 +23,12 @@
 //If recoilType 0 then don't do recoil
 //              1 then aMC@NLO DY and W+Jets MC samples
 //              2 MG5 DY and W+Jets MC samples or Higgs MC samples
+//
+//If doTES      0 does not apply any TES shifts
+//              1 applies TES shifts to TT channel, no effect on other channels
+//
+//If isWJets    0 no shift in number of jets used for recoil corrections
+//              1 shifts njets + 1 for recoil corrections
 
 void copyFiles( optutl::CommandLineParser parser, TFile* fOld, TFile* fNew) ;
 void readdir(TDirectory *dir, optutl::CommandLineParser parser, char TreeToUse[], int recoilType, int doTES, int isWJets) ;
